@@ -26,7 +26,7 @@ class VillageHandler(osmium.SimpleHandler):
             return
 
         if "abandoned" in w.tags:
-            if w.tags["abandoned"] in self.parking_filter:
+            if w.tags["abandoned"] in self.village_filter:
                 return
 
         geometry = geojson.Polygon([[(n.lon, n.lat) for n in w.nodes]])
