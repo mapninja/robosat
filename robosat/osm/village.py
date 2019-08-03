@@ -12,7 +12,7 @@ class VillageHandler(osmium.SimpleHandler):
     """
 
     # parking=* to discard because these features are not vislible in satellite imagery
-    #village_filter = set(["yes"])
+    village_filter = set(["yes"])
 
     def __init__(self, out, batch):
         super().__init__()
@@ -25,9 +25,9 @@ class VillageHandler(osmium.SimpleHandler):
         if "place" not in w.tags or w.tags["place"] != "village":
             return
 
-#        if "abandoned" in w.tags:
-#            if w.tags["abandoned"] in self.village_filter:
-#                return
+        if "abandoned" in w.tags:
+            if w.tags["abandoned"] in self.village_filter:
+                return
 
         geometry = geojson.Polygon([[(n.lon, n.lat) for n in w.nodes]])
         shape = shapely.geometry.shape(geometry)
